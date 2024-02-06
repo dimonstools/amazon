@@ -1,5 +1,6 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,6 +13,11 @@ public class MainClass {
 
     private static WebDriver driver;
 
+    public MainClass(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
     public static void main(String[] args){
         System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\geckodriver.exe");
         driver = new ChromeDriver();
@@ -22,7 +28,7 @@ public class MainClass {
         MainPage mainPage = new MainPage(driver);
         mainPage.searchBook("Java");
         List<String> list = bookDescription(1);
-    }
+        }
 
     public static List<String> bookDescription(int itemNumber){
         String path = "//div[@data-index=\"%d\" and @data-component-type=\"s-search-result\"]";

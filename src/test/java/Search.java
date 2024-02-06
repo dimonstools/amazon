@@ -19,6 +19,8 @@ private WebDriver driver;
 
 private MainPage mainPage;
 
+private MainClass mainClass;
+
     @BeforeTest
     public void setUp(){
         System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\geckodriver.exe");
@@ -30,6 +32,7 @@ private MainPage mainPage;
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Hello, sign in']")));
         mainPage = new PageFactory().initElements(driver, MainPage.class);
         mainPage.searchBook("Java");
+        mainClass = new PageFactory().initElements(driver, MainClass.class);
     }
 
     @AfterTest
@@ -46,11 +49,7 @@ private MainPage mainPage;
 
     @Test
     public void isPresence(){
-        List<WebElement> listOfElements = driver.findElements(By.xpath("//span[@data-component-type=\"s-search-results\"]//a[@class=\"a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal\"]"));
-        for (WebElement link:listOfElements){
-            String lol = link.getAttribute("href");
-            Assert.assertEquals(lol, "https://www.amazon.com/Head-First-Java-Brain-Friendly-Guide/dp/1491910771/ref=sr_1_1?keywords=Java&qid=1707147004&s=books&sr=1-1");
-        }
+        Assert.assertTrue(mainPage.isLinkHere("https://www.amazon.com/Head-First-Java-Brain-Friendly-Guide/dp/1491910771/ref=sr_1_1?keywords=Java"));
     }
 
 }
