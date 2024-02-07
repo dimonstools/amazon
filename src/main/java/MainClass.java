@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainClass {
@@ -26,31 +25,21 @@ public class MainClass {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Hello, sign in']")));
 
         MainPage mainPage = new MainPage(driver);
+        Book book = new Book(driver);
         mainPage.searchBook("Java");
-        List<String> list = bookDescription(1);
+        List<String> listOfBooks = book.bookDescription(1);
+        for (String element : listOfBooks){
+            System.out.println(element);
         }
+        List<String> expectedBook = book.bookDescription("https://www.amazon.com/Head-First-Java-Brain-Friendly-Guide/dp/1491910771/ref=sr_1_1?keywords=Java&qid=1707310752&s=books&sr=1-1");
+        for (String element : expectedBook){
+            System.out.println(element);
+        }
+        System.out.println(listOfBooks.contains(expectedBook));
+    }
 
-    public static List<String> bookDescription(int itemNumber){
-        String path = "//div[@data-index=\"%d\" and @data-component-type=\"s-search-result\"]";
-        WebElement firstBook = driver.findElement(By.xpath(String.format(path, itemNumber+1)));
-        String str = firstBook.getText();
-        List<String> list = new ArrayList<>();
-        String[] stringers = str.split("\n");
-        for (String words : stringers){
-            list.add(words);
-        }
-        if (list.get(0).contains("Best Seller")){
-            System.out.println("It is a Best Seller");
-            String priceToRent = list.get(8)+"."+list.get(9);
-            String priceToBuy = list.get(10)+"."+list.get(11);
-            System.out.println(list.get(1)+"\n"+list.get(2)+"\n"+priceToRent+"\n"+priceToBuy);
-        } else {
-            System.out.println("This isn't Best Seller");
-            String priceToRent = list.get(7)+"."+list.get(8);
-            String priceToBuy = list.get(9)+"."+list.get(10);
-            System.out.println(list.get(0)+"\n"+list.get(1)+list.get(2)+"\n"+priceToRent+"\n"+priceToBuy);
-        }
-        return list;
+    public static void close(){
+        driver.quit();
     }
 
 
