@@ -26,6 +26,7 @@ public class MainPage {
     public MainPage searchBook(String bookTitle){
         searchFilter.click();
         booksOption.click();
+        inputField.clear();
         inputField.sendKeys(bookTitle+ Keys.ENTER);
         return this;
     }

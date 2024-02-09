@@ -81,12 +81,12 @@ public class Book {
         } else {
             String bs = "This isn't Best Seller";
             String priceToRent = list.get(7)+"."+list.get(8);
-            String priceToBuy = list.get(9)+"."+list.get(10);
+//            String priceToBuy = list.get(9)+"."+list.get(10);
             bookDesc.add(bs);
             bookDesc.add(list.get(0));
             bookDesc.add(author);
             bookDesc.add(priceToRent);
-            bookDesc.add(priceToBuy);
+//            bookDesc.add(priceToBuy);
         }
         return bookDesc;
     }
