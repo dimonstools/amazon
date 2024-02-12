@@ -72,26 +72,28 @@ public class Book {
             String bs = "It is a Best Seller";
             String priceToRent = list.get(8)+"."+list.get(9);
             String priceToBuy = list.get(10)+"."+list.get(11);
-            bookDesc.add(bs);
-            bookDesc.add(list.get(1));
-//            bookDesc.add(authorList.get(2));
-            bookDesc.add(author);
-            bookDesc.add(priceToRent);
-            bookDesc.add(priceToBuy);
+            bookDesc.add(bs+"\n"+list.get(1)+"\n"+author+"\n"+priceToRent+"\n"+priceToBuy);
+//            bookDesc.add(bs);
+//            bookDesc.add(list.get(1));
+////            bookDesc.add(authorList.get(2));
+//            bookDesc.add(author);
+//            bookDesc.add(priceToRent);
+//            bookDesc.add(priceToBuy);
         } else {
             String bs = "This isn't Best Seller";
             String priceToRent = list.get(7)+"."+list.get(8);
 //            String priceToBuy = list.get(9)+"."+list.get(10);
-            bookDesc.add(bs);
-            bookDesc.add(list.get(0));
-            bookDesc.add(author);
-            bookDesc.add(priceToRent);
-//            bookDesc.add(priceToBuy);
+            bookDesc.add(bs+"\n"+list.get(0)+"\n"+author+"\n"+priceToRent);
+//            bookDesc.add(bs);
+//            bookDesc.add(list.get(0));
+//            bookDesc.add(author);
+//            bookDesc.add(priceToRent);
+////            bookDesc.add(priceToBuy);
         }
         return bookDesc;
     }
 
-    public static List<String> bookDescription(String url){
+    public static String bookDescription(String url){
         driver.get(url);
         WebElement bestSeller = driver.findElement(By.xpath("//a/i[@class=\"a-icon a-icon-addon p13n-best-seller-badge\"]"));
         WebElement author = driver.findElement(By.xpath("//span[@class=\"author notFaded\"]/.."));
@@ -100,9 +102,8 @@ public class Book {
         WebElement series = driver.findElement(By.xpath("//div[@data-csa-c-slot-id=\"seriesBulletWidget_feature_div\"]"));
         WebElement priceElement = driver.findElement(By.xpath("//span[@class=\"slot-price\"]"));
         String[] stringers = priceElement.getText().split(" - ");
-        List<String> price = new ArrayList<>();
-        price.add(stringers[0]+" to rent");
-        price.add(stringers[1]+" to buy");
+        String price1 = (stringers[0]+" to rent");
+        String price2 = (stringers[1]+" to buy");
 //        for (String words : stringers){
 //            price.add("\n"+words);
 //        }
@@ -114,11 +115,12 @@ public class Book {
         str=str.replace("& 1 more", "et al.");
         String bs;
         if (bestSeller.isDisplayed()){bs="It is a Best Seller";} else bs = "This isn't Best Seller";
-        List<String> bookDesc = new ArrayList<>();
-        bookDesc.add(bs);
-        bookDesc.add(title.getText());
-        bookDesc.add(str);
-        bookDesc.addAll(price);
+        String bookDesc = "";
+        bookDesc=(bs+"\n"+title.getText()+"\n"+str+"\n"+price1+"\n"+price2);
+//        bookDesc.add(bs);
+//        bookDesc.add(title.getText());
+//        bookDesc.add(str);
+//        bookDesc.addAll(price);
         return bookDesc;
     }
 }

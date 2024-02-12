@@ -45,18 +45,27 @@ public class MainClass {
     public static boolean compareAllBooks(String link){
         Book book = new Book(driver);
         MainPage mainPage = new MainPage(driver);
-        List<String> expectedBook = book.bookDescription(link);
+        String expectedBook = book.bookDescription(link);
+        System.out.println("This is expected Book:"+"\n"+expectedBook);
+//        for (String element : expectedBook) {
+//            System.out.println(element);
+//        }
         mainPage.searchBook("Java");
         boolean result = false;
         for (int i=1; i<19; i++) {
             if(i!=4){
                 if(i!=12){
             List<String> listOfBooks = book.bookDescription(i);
-//            for (String element : listOfBooks) {
-//                System.out.println(element);
-//            }
+
+                    System.out.println("\n"+"This is searched Book:"+"\n");
+            for (String element : listOfBooks) {
+                System.out.println(element);
+            }
             if(listOfBooks.contains(expectedBook)) result=true;
-            listOfBooks.clear();}}
+//                    System.out.println("Size expected book list: "+ expectedBook.size());
+//                    System.out.println("Size searched book list: "+ listOfBooks.size());
+            listOfBooks.clear();
+                }}
         }
         return result;
     }
