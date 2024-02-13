@@ -50,6 +50,7 @@ public class MainClass {
 //        for (String element : expectedBook) {
 //            System.out.println(element);
 //        }
+        mainPage.setFilter("Books");
         mainPage.searchBook("Java");
         boolean result = false;
         for (int i=1; i<19; i++) {

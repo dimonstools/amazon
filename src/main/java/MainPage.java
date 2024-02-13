@@ -4,7 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class MainPage {
@@ -23,9 +26,15 @@ public class MainPage {
     @FindBy(xpath = "//input[@type=\"text\"]")
     private WebElement inputField;
 
-    public MainPage searchBook(String bookTitle){
+    public MainPage setFilter(String filter){
         searchFilter.click();
-        booksOption.click();
+        String path = "//select/option[text()='%s']";
+        WebElement getFilter = driver.findElement(By.xpath(String.format(path, filter)));
+        getFilter.click();
+        return this;
+    }
+
+    public MainPage searchBook(String bookTitle){
         inputField.clear();
         inputField.sendKeys(bookTitle+ Keys.ENTER);
         return this;

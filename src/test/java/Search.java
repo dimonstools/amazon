@@ -26,10 +26,10 @@ private MainClass mainClass = new PageFactory().initElements(driver, MainClass.c
         mainClass.main();
     }
 
-    @AfterTest
-    public void tearDown(){
-        mainClass.close();
-    }
+//    @AfterTest
+//    public void tearDown(){
+//        mainClass.close();
+//    }
 
     @Test
     public void isPresence(){
