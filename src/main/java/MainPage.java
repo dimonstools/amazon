@@ -34,7 +34,7 @@ public class MainPage {
         return this;
     }
 
-    public MainPage searchBook(String bookTitle){
+    public MainPage searchEntities(String bookTitle){
         inputField.clear();
         inputField.sendKeys(bookTitle+ Keys.ENTER);
         return this;

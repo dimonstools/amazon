@@ -25,6 +25,10 @@ public class MainClass {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Hello, sign in']")));
 
         Book book = new Book(driver);
+
+        MainPage mainPage = new MainPage(driver);
+        mainPage.setFilter("Books");
+        mainPage.searchEntities("Java");
 //        for (String element : expectedBook){
 //            System.out.println(element);
 //        }
@@ -42,33 +46,33 @@ public class MainClass {
         driver.quit();
     }
 
-    public static boolean compareAllBooks(String link){
-        Book book = new Book(driver);
-        MainPage mainPage = new MainPage(driver);
-        String expectedBook = book.bookDescription(link);
-        System.out.println("This is expected Book:"+"\n"+expectedBook);
-//        for (String element : expectedBook) {
-//            System.out.println(element);
+//    public static boolean compareAllBooks(String link){
+//        Book book = new Book(driver);
+//        MainPage mainPage = new MainPage(driver);
+//        String expectedBook = book.bookDescription(link);
+//        System.out.println("This is expected Book:"+"\n"+expectedBook);
+////        for (String element : expectedBook) {
+////            System.out.println(element);
+////        }
+//        mainPage.setFilter("Books");
+//        mainPage.searchEntities("Java");
+//        boolean result = false;
+//        for (int i=1; i<19; i++) {
+//            if(i!=4){
+//                if(i!=12){
+//            List<String> listOfBooks = book.bookDescription();
+//
+//                    System.out.println("\n"+"This is searched Book:"+"\n");
+//            for (String element : listOfBooks) {
+//                System.out.println(element);
+//            }
+//            if(listOfBooks.contains(expectedBook)) result=true;
+////                    System.out.println("Size expected book list: "+ expectedBook.size());
+////                    System.out.println("Size searched book list: "+ listOfBooks.size());
+//            listOfBooks.clear();
+//                }}
 //        }
-        mainPage.setFilter("Books");
-        mainPage.searchBook("Java");
-        boolean result = false;
-        for (int i=1; i<19; i++) {
-            if(i!=4){
-                if(i!=12){
-            List<String> listOfBooks = book.bookDescription(i);
-
-                    System.out.println("\n"+"This is searched Book:"+"\n");
-            for (String element : listOfBooks) {
-                System.out.println(element);
-            }
-            if(listOfBooks.contains(expectedBook)) result=true;
-//                    System.out.println("Size expected book list: "+ expectedBook.size());
-//                    System.out.println("Size searched book list: "+ listOfBooks.size());
-            listOfBooks.clear();
-                }}
-        }
-        return result;
-    }
+//        return result;
+//    }
 
 }

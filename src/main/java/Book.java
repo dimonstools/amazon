@@ -5,16 +5,25 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Book {
 
     private static WebDriver driver;
 
+    private static List<String> bookDesc = new ArrayList<>();
+    private String bookInfo;
+
     public Book(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
+    public Book() {
+        this.bookInfo= bookInfo;
+    }
+
 
 //    @FindBy(xpath = "\"//a/i[@class=\\\"a-icon a-icon-addon p13n-best-seller-badge\\\"]\"")
 //    private static WebElement bestSeller;
@@ -35,13 +44,14 @@ public class Book {
 //    private static WebElement priceElement;
 
 
-    public static List<String> bookDescription(int itemNumber){
-
+    public static List<String> bookDescription(){
+        for (int i=1; i<19; i++) {
+            if(i!=4){
+                if(i!=12){
         String path = "//div[@data-index=\"%d\" and @data-component-type=\"s-search-result\"]";
-        WebElement firstBook = driver.findElement(By.xpath(String.format(path, itemNumber+1)));
+        WebElement firstBook = driver.findElement(By.xpath(String.format(path, i+1)));
         String str = firstBook.getText();
         List<String> list = new ArrayList<>();
-        List<String> bookDesc = new ArrayList<>();
         String[] stringers = str.split("\n");
         for (String words : stringers){
             list.add(words);
@@ -57,7 +67,7 @@ public class Book {
 //        }
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-        List<WebElement> authorElements = driver.findElements(By.xpath((String.format(path, itemNumber+1)+"//span[@class=\"a-size-base\"]")));
+        List<WebElement> authorElements = driver.findElements(By.xpath((String.format(path, i+1)+"//span[@class=\"a-size-base\"]")));
         String author ="";
         for (WebElement link:authorElements){
            String lol = link.getText();
@@ -89,11 +99,14 @@ public class Book {
 //            bookDesc.add(author);
 //            bookDesc.add(priceToRent);
 ////            bookDesc.add(priceToBuy);
+        }}}}
+        for (String element : bookDesc){
+            System.out.println(element);
         }
         return bookDesc;
     }
 
-    public static String bookDescription(String url){
+    public static String getDetailedInfoBook(String url){
         driver.get(url);
         WebElement bestSeller = driver.findElement(By.xpath("//a/i[@class=\"a-icon a-icon-addon p13n-best-seller-badge\"]"));
         WebElement author = driver.findElement(By.xpath("//span[@class=\"author notFaded\"]/.."));

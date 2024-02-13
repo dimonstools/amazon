@@ -26,16 +26,17 @@ private MainClass mainClass = new PageFactory().initElements(driver, MainClass.c
         mainClass.main();
     }
 
-//    @AfterTest
-//    public void tearDown(){
-//        mainClass.close();
-//    }
+    @AfterTest
+    public void tearDown(){
+        mainClass.close();
+    }
 
     @Test
     public void isPresence(){
-        boolean result = MainClass.compareAllBooks("https://www.amazon.com/Head-First-Java-Brain-Friendly-Guide/dp/1491910771/ref=sr_1_1?keywords=Java&qid=1707310752&s=books&sr=1-1");
-        System.out.println(result);
-        Assert.assertTrue(result);
+//        Book book = new Book();
+        List<String> listOfBooks = Book.bookDescription();
+        String expectedBook = Book.getDetailedInfoBook("https://www.amazon.com/Head-First-Java-Brain-Friendly-Guide/dp/1491910771/ref=sr_1_1?keywords=Java");
+        Assert.assertTrue(listOfBooks.contains(expectedBook), "Expected book wasn't found");
     }
 
 }
