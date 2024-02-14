@@ -33,10 +33,11 @@ private MainClass mainClass = new PageFactory().initElements(driver, MainClass.c
 
     @Test
     public void isPresence(){
-//        Book book = new Book();
-        List<String> listOfBooks = Book.bookDescription();
-        String expectedBook = Book.getDetailedInfoBook("https://www.amazon.com/Head-First-Java-Brain-Friendly-Guide/dp/1491910771/ref=sr_1_1?keywords=Java");
-        Assert.assertTrue(listOfBooks.contains(expectedBook), "Expected book wasn't found");
+        Book book = new Book();
+        List<Book> listOfBooks = book.getBooks();
+        Book expectedBook = book.getDetailedInfoBook("https://www.amazon.com/Head-First-Java-Brain-Friendly-Guide/dp/1491910771/ref=sr_1_1?keywords=Java");
+//        Assert.assertTrue(listOfBooks.contains(expectedBook), "Expected book wasn't found");
+        Assert.assertTrue(book.bookInSearchResults(listOfBooks, expectedBook));
     }
 
 }
